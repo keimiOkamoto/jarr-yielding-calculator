@@ -1,17 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
+import domain.Tank;
+
+import java.util.*;
 
 public enum TankContainer {
     INSTANCE;
 
-    private List<Tank> tanks = new ArrayList<>();
+    private Map tanks = Collections.EMPTY_MAP;
 
-    public void setTanks(List<Tank> tanks) {
+    public void setTanks(Map<TANK_TYPE, List<Tank>> tanks) {
         this.tanks = tanks;
     }
 
-    public List<Tank> getTanks() {
+    public Map getTanks() {
         return tanks;
     }
-
 }

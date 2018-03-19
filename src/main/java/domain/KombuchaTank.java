@@ -1,10 +1,12 @@
+package domain;
+
 public class KombuchaTank implements Tank {
 
     private double volume;
     private double brixValue;
     private double ttaValue;
 
-    public KombuchaTank(double volume, double brixValue, double ttaValue){
+    public KombuchaTank(double volume, double brixValue, double ttaValue) {
         this.volume = volume;
         this.brixValue = brixValue;
         this.ttaValue = ttaValue;
@@ -24,4 +26,5 @@ public class KombuchaTank implements Tank {
     public double getTtaValue() {
         return ttaValue;
     }
+
 }

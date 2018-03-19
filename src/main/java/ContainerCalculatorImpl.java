@@ -1,33 +1,49 @@
+import domain.Tank;
+
 import java.util.List;
-import java.util.OptionalDouble;
+import java.util.Map;
 
-public class ContainerCalculatorImpl implements ContainerCalculator{
+public class ContainerCalculatorImpl implements ContainerCalculator {
 
-    private List<Tank> tanks;
+    private final Map<TANK_TYPE, List<Tank>> tanks;
 
-    public ContainerCalculatorImpl() {
+    private static final double TARGET_TTA = 0.14;
+
+    ContainerCalculatorImpl() {
         tanks = TankContainer.INSTANCE.getTanks();
     }
 
     @Override
     public double getTotalVolume() {
-        return tanks.stream()
+        return tanks.get(TANK_TYPE.PRIMARY).stream()
                 .mapToDouble(Tank::getVolume)
                 .sum();
     }
 
     @Override
-    public OptionalDouble getAverageBrix() {
-        return tanks.stream()
+    public double getAverageBrix() {
+        return tanks.get(TANK_TYPE.PRIMARY).stream()
                     .mapToDouble(Tank::getBrixValue)
-                    .average();
+                    .average()
+                    .getAsDouble();
     }
 
     @Override
-    public OptionalDouble getAverageTta() {
-        return tanks.stream()
+    public double getAverageTta() {
+        return tanks.get(TANK_TYPE.PRIMARY).stream()
                     .mapToDouble(Tank::getTtaValue)
-                    .average();
+                    .average()
+                    .getAsDouble();
+    }
+
+    @Override
+    public double getAcidityDifference() {
+        return TARGET_TTA - getAverageTta();
+    }
+
+    @Override
+    public double getAcidifierTTALevelVsBlends() {
+        return tanks.get(TANK_TYPE.ACIDIFIER).get(0).getTtaValue() / getAverageTta();
     }
 
 }
