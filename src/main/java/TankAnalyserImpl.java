@@ -3,13 +3,13 @@ import domain.Tank;
 import java.util.List;
 import java.util.Map;
 
-public class ContainerCalculatorImpl implements ContainerCalculator {
+public class TankAnalyserImpl implements TankAnalyser {
 
     private final Map<TANK_TYPE, List<Tank>> tanks;
 
     private static final double TARGET_TTA = 0.14;
 
-    ContainerCalculatorImpl() {
+    TankAnalyserImpl() {
         tanks = TankContainer.INSTANCE.getTanks();
     }
 

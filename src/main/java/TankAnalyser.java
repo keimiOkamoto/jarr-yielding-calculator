@@ -1,4 +1,4 @@
-public interface ContainerCalculator {
+public interface TankAnalyser {
 
     double getTotalVolume();
 

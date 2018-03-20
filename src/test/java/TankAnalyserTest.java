@@ -10,9 +10,9 @@ import java.util.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ContainerCalculatorTest {
+public class TankAnalyserTest {
 
-    private ContainerCalculator containerCalculator;
+    private TankAnalyser containerCalculator;
 
     @Before
     public void buildup() {
@@ -28,7 +28,7 @@ public class ContainerCalculatorTest {
         tanks.put(TANK_TYPE.ACIDIFIER, acidifierTanks);
 
         TankContainer.INSTANCE.setTanks(tanks);
-        containerCalculator = new ContainerCalculatorImpl();
+        containerCalculator = new TankAnalyserImpl();
     }
 
     @Test
@@ -85,7 +85,6 @@ public class ContainerCalculatorTest {
         String actualAcidifierTTALevelVsBlends = decimalFormat.format(acidifierTTALevelVsBlends);
 
         assertThat(Double.parseDouble(actualAcidifierTTALevelVsBlends), is(expectedAcidifierTTALevelVsBlends));
-
     }
 
 }
