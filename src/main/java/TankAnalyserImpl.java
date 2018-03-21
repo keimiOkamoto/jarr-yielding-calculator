@@ -46,4 +46,12 @@ public class TankAnalyserImpl implements TankAnalyser {
         return tanks.get(TANK_TYPE.ACIDIFIER).get(0).getTtaValue() / getAverageTta();
     }
 
+    @Override
+    public double getLitresOfAcidifierEquivalentToTTAofBlend() {
+        return tanks.get(TANK_TYPE.PRIMARY).stream()
+                .mapToDouble(Tank::getVolume)
+                .sum() / getAcidifierTTALevelVsBlends();
+    }
+
+
 }

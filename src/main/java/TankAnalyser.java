@@ -19,4 +19,12 @@ public interface TankAnalyser {
      * @return the acidifiers TTA level divided by the average TTa level of the primary tanks.
      */
     double getAcidifierTTALevelVsBlends();
+
+    /**
+     *  The total volume of the primary tanks divided by the acidifier TTA level divided by the
+     *  average of the primary tank.
+     *
+     * @return the total amound of acid per litre equivalent to the acidifier.
+     */
+    double getLitresOfAcidifierEquivalentToTTAofBlend();
 }

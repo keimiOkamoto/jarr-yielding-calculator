@@ -12,10 +12,15 @@ import static org.junit.Assert.assertThat;
 
 public class TankAnalyserTest {
 
-    private TankAnalyser containerCalculator;
+    private TankAnalyser tankAnalyser;
+
+    private DecimalFormat decimalFormat;
 
     @Before
     public void buildup() {
+        decimalFormat = new DecimalFormat("#.######");
+        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
+
         Tank tank1 = new KombuchaTank(800, 5.2, 0.126);
         Tank tank2 = new KombuchaTank(800, 5.1, 0.134);
         Tank acidifierTank = new KombuchaTank(800, 2.2, 0.852);
@@ -28,14 +33,14 @@ public class TankAnalyserTest {
         tanks.put(TANK_TYPE.ACIDIFIER, acidifierTanks);
 
         TankContainer.INSTANCE.setTanks(tanks);
-        containerCalculator = new TankAnalyserImpl();
+        tankAnalyser = new TankAnalyserImpl();
     }
 
     @Test
     public void shouldBeAbleToGetTotalYieldVolumeOfTanks() {
         double expectedTotalVolume = 1600;
 
-        double actualTotalVolume = containerCalculator.getTotalVolume();
+        double actualTotalVolume = tankAnalyser.getTotalVolume();
 
         assertThat(actualTotalVolume, is(expectedTotalVolume));
     }
@@ -44,7 +49,7 @@ public class TankAnalyserTest {
     public void shouldBeAbleToGetAverageOfBrix() {
         double expectedAverageBrix = 5.15;
 
-        double actualAverageBrix = containerCalculator.getAverageBrix();
+        double actualAverageBrix = tankAnalyser.getAverageBrix();
 
         assertThat(actualAverageBrix, is(expectedAverageBrix));
     }
@@ -53,8 +58,7 @@ public class TankAnalyserTest {
     public void shouldBeAbleToGetAverageOfTta() {
         double expectedAverageTta = 0.13;
 
-        double actualAverageTta = containerCalculator.getAverageTta();
-
+        double actualAverageTta = tankAnalyser.getAverageTta();
 
         assertThat(actualAverageTta, is(expectedAverageTta));
     }
@@ -66,7 +70,7 @@ public class TankAnalyserTest {
 
         double expectedAcidity = 0.01;
 
-        double acidity = containerCalculator.getAcidityDifference();
+        double acidity = tankAnalyser.getAcidityDifference();
 
         String actualAcidity = decimalFormat.format(acidity);
 
@@ -80,11 +84,21 @@ public class TankAnalyserTest {
 
         double expectedAcidifierTTALevelVsBlends = 6.55384615;
 
-        double acidifierTTALevelVsBlends = containerCalculator.getAcidifierTTALevelVsBlends();
+        double acidifierTTALevelVsBlends = tankAnalyser.getAcidifierTTALevelVsBlends();
 
-        String actualAcidifierTTALevelVsBlends = decimalFormat.format(acidifierTTALevelVsBlends);
+        double actualAcidifierTTALevelVsBlends = Double.parseDouble(decimalFormat.format(acidifierTTALevelVsBlends));
 
-        assertThat(Double.parseDouble(actualAcidifierTTALevelVsBlends), is(expectedAcidifierTTALevelVsBlends));
+        assertThat(actualAcidifierTTALevelVsBlends, is(expectedAcidifierTTALevelVsBlends));
     }
 
+    @Test
+    public void shouldBeAleToGetAcidifierTTAFactorVsBlend() {
+        double expectedAcidifierTTALevelVsBlends = 244.131455;
+
+        double litresOfAcidifierTTAEquivalentToTTAofPrimary = tankAnalyser.getLitresOfAcidifierEquivalentToTTAofBlend();
+
+        double actualLitresOfAcidifierTTAEquivalentToTTAofPrimary = Double.parseDouble(decimalFormat.format(litresOfAcidifierTTAEquivalentToTTAofPrimary));
+
+        assertThat(actualLitresOfAcidifierTTAEquivalentToTTAofPrimary, is(expectedAcidifierTTALevelVsBlends));
+    }
 }
