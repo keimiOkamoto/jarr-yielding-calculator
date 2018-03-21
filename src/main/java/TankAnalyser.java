@@ -27,4 +27,14 @@ public interface TankAnalyser {
      * @return the total amound of acid per litre equivalent to the acidifier.
      */
     double getLitresOfAcidifierEquivalentToTTAofBlend();
+
+    /**
+     * Average TTA of the primary tanks divided by the acidity
+     *
+     * @return percentage increase of TTA needed
+     */
+    double getPercentageIncreaseOfRequiredTTA();
+
+
+
 }

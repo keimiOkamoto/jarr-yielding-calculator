@@ -53,5 +53,10 @@ public class TankAnalyserImpl implements TankAnalyser {
                 .sum() / getAcidifierTTALevelVsBlends();
     }
 
+    @Override
+    public double getPercentageIncreaseOfRequiredTTA() {
+        return getAverageTta() / getAcidityDifference();
+    }
+
 
 }

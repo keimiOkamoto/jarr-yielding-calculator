@@ -95,4 +95,15 @@ public class TankAnalyserTest {
 
         assertThat(actualLitresOfAcidifierTTAEquivalentToTTAofPrimary, is(expectedAcidifierTTALevelVsBlends));
     }
+
+    @Test
+    public void shouldBeAbleToGetPercentageIncreaseNeededOfTTA() {
+        double expectedPercentageIncreaseOfTTA = 13;
+
+        double PercentageIncreaseOfTTA = tankAnalyser.getPercentageIncreaseOfRequiredTTA();
+
+        double actualPercentageIncreaseOfTTA = Double.parseDouble(decimalFormat.format(PercentageIncreaseOfTTA));
+
+        assertThat(actualPercentageIncreaseOfTTA, is(expectedPercentageIncreaseOfTTA));
+    }
 }
