@@ -18,7 +18,6 @@ public class TankAnalyserTest {
     @Before
     public void buildup() {
         decimalFormat = new DecimalFormat("#.#######");
-//        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
 
         Tank tank1 = new KombuchaTank(800, 5.2, 0.126);
         Tank tank2 = new KombuchaTank(800, 5.1, 0.134);
