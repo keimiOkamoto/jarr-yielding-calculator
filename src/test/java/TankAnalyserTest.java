@@ -18,8 +18,8 @@ public class TankAnalyserTest {
 
     @Before
     public void buildup() {
-        decimalFormat = new DecimalFormat("#.######");
-        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
+        decimalFormat = new DecimalFormat("#.#######");
+//        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
 
         Tank tank1 = new KombuchaTank(800, 5.2, 0.126);
         Tank tank2 = new KombuchaTank(800, 5.1, 0.134);
@@ -65,9 +65,6 @@ public class TankAnalyserTest {
 
     @Test
     public void shouldBeAbleToGetAcidity() {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
-
         double expectedAcidity = 0.01;
 
         double acidity = tankAnalyser.getAcidityDifference();
@@ -79,10 +76,7 @@ public class TankAnalyserTest {
 
     @Test
     public void shouldBeAbleToGetAcidifierTTAFactorVsBlend() {
-        DecimalFormat decimalFormat = new DecimalFormat("#.########");
-        decimalFormat.setRoundingMode(RoundingMode.HALF_DOWN);
-
-        double expectedAcidifierTTALevelVsBlends = 6.55384615;
+        double expectedAcidifierTTALevelVsBlends = 6.5538462;
 
         double acidifierTTALevelVsBlends = tankAnalyser.getAcidifierTTALevelVsBlends();
 
@@ -93,7 +87,7 @@ public class TankAnalyserTest {
 
     @Test
     public void shouldBeAleToGetAcidifierTTAFactorVsBlend() {
-        double expectedAcidifierTTALevelVsBlends = 244.131455;
+        double expectedAcidifierTTALevelVsBlends = 244.1314554;
 
         double litresOfAcidifierTTAEquivalentToTTAofPrimary = tankAnalyser.getLitresOfAcidifierEquivalentToTTAofBlend();
 
