@@ -36,5 +36,12 @@ public interface TankAnalyser {
     double getPercentageIncreaseOfRequiredTTA();
 
 
+    /**
+     * Get litres of acidifier required to match the base acidity.
+     *
+     * @return litres if acidifier needed.
+     */
+    double getLitresOfAcidifierRequiredToMatchBaseAcidity();
+
 
 }

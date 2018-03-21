@@ -3,7 +3,6 @@ import domain.Tank;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -100,10 +99,21 @@ public class TankAnalyserTest {
     public void shouldBeAbleToGetPercentageIncreaseNeededOfTTA() {
         double expectedPercentageIncreaseOfTTA = 13;
 
-        double PercentageIncreaseOfTTA = tankAnalyser.getPercentageIncreaseOfRequiredTTA();
+        double percentageIncreaseOfTTA = tankAnalyser.getPercentageIncreaseOfRequiredTTA();
 
-        double actualPercentageIncreaseOfTTA = Double.parseDouble(decimalFormat.format(PercentageIncreaseOfTTA));
+        double actualPercentageIncreaseOfTTA = Double.parseDouble(decimalFormat.format(percentageIncreaseOfTTA));
 
         assertThat(actualPercentageIncreaseOfTTA, is(expectedPercentageIncreaseOfTTA));
+    }
+
+    @Test
+    public void shouldBeAbleToGetLitresOfAcidifierRequiredToMatchBaseAcidity() {
+        double expectedLitresOfAcidifierRequiredToMatchBaseAcidity = 31.7370892;
+
+        double litresOfAcidifierRequiredToMatchBaseAcidity = tankAnalyser.getLitresOfAcidifierRequiredToMatchBaseAcidity();
+
+        double actualLitresOfAcidifierRequiredToMatchBaseAcidity = Double.parseDouble(decimalFormat.format(litresOfAcidifierRequiredToMatchBaseAcidity));
+
+        assertThat(actualLitresOfAcidifierRequiredToMatchBaseAcidity, is(expectedLitresOfAcidifierRequiredToMatchBaseAcidity));
     }
 }

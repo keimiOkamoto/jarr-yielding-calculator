@@ -58,5 +58,9 @@ public class TankAnalyserImpl implements TankAnalyser {
         return getAverageTta() / getAcidityDifference();
     }
 
+    @Override
+    public double getLitresOfAcidifierRequiredToMatchBaseAcidity() {
+        return (getLitresOfAcidifierEquivalentToTTAofBlend() / 100) * getPercentageIncreaseOfRequiredTTA();
+    }
 
 }
