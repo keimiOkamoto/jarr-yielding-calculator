@@ -1,47 +1,27 @@
-public interface TankAnalyser {
+import domain.Tank;
 
-    double getTotalVolume();
+import java.util.List;
 
-    double getAverageBrix();
+public abstract class TankAnalyser {
 
-    double getAverageTta();
+    protected List<Tank> primaryTanks;
 
-    /**
-     * Acidity is calculated by minusing the average TTA value from the target TTA value.
-     *
-     * @return the difference in acidity from the target acidity.
-     */
-    double getAcidityDifference();
+    protected Tank acidifierTanks;
 
-    /**
-     * Acidifier TTA level divided by the average of the primary tanks will yield this value,
-     *
-     * @return the acidifiers TTA level divided by the average TTa level of the primary tanks.
-     */
-    double getAcidifierTTALevelVsBlends();
+    public TankAnalyser(List<Tank> primaryTanks, Tank acidifierTanks) {
+        this.primaryTanks = primaryTanks;
+        this.acidifierTanks = acidifierTanks;
+    }
 
-    /**
-     *  The total volume of the primary tanks divided by the acidifier TTA level divided by the
-     *  average of the primary tank.
-     *
-     * @return the total amound of acid per litre equivalent to the acidifier.
-     */
-    double getLitresOfAcidifierEquivalentToTTAofBlend();
+    public double getTotalVolume() {
+        return primaryTanks.stream()
+                .mapToDouble(Tank::getVolume)
+                .sum();
+    }
 
     /**
-     * Average TTA of the primary tanks divided by the acidity
-     *
-     * @return percentage increase of TTA needed
+     * Given a type of property that needs to analyse
+     * @return
      */
-    double getPercentageIncreaseOfRequiredTTA();
-
-
-    /**
-     * Get litres of acidifier required to match the base acidity.
-     *
-     * @return litres if acidifier needed.
-     */
-    double getLitresOfAcidifierRequiredToMatchBaseAcidity();
-
-
+    abstract double calculate();
 }

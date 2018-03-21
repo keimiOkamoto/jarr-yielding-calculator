@@ -1,4 +1,5 @@
 import domain.KombuchaTank;
+import domain.TANK_TYPE;
 import domain.Tank;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +10,9 @@ import java.util.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TankAnalyserTest {
+public class TTATankAnalyserTest {
 
-    private TankAnalyser tankAnalyser;
+    private TTAAnalyser tankAnalyser;
 
     private DecimalFormat decimalFormat;
 
@@ -31,7 +32,7 @@ public class TankAnalyserTest {
         tanks.put(TANK_TYPE.ACIDIFIER, acidifierTanks);
 
         TankContainer.INSTANCE.setTanks(tanks);
-        tankAnalyser = new TankAnalyserImpl();
+        tankAnalyser = new TTAAnalyser(priamaryTanks, acidifierTank);
     }
 
     @Test
@@ -44,19 +45,10 @@ public class TankAnalyserTest {
     }
 
     @Test
-    public void shouldBeAbleToGetAverageOfBrix() {
-        double expectedAverageBrix = 5.15;
-
-        double actualAverageBrix = tankAnalyser.getAverageBrix();
-
-        assertThat(actualAverageBrix, is(expectedAverageBrix));
-    }
-
-    @Test
     public void shouldBeAbleToGetAverageOfTta() {
         double expectedAverageTta = 0.13;
 
-        double actualAverageTta = tankAnalyser.getAverageTta();
+        double actualAverageTta = tankAnalyser.getAverage();
 
         assertThat(actualAverageTta, is(expectedAverageTta));
     }
@@ -114,5 +106,16 @@ public class TankAnalyserTest {
         double actualLitresOfAcidifierRequiredToMatchBaseAcidity = Double.parseDouble(decimalFormat.format(litresOfAcidifierRequiredToMatchBaseAcidity));
 
         assertThat(actualLitresOfAcidifierRequiredToMatchBaseAcidity, is(expectedLitresOfAcidifierRequiredToMatchBaseAcidity));
+    }
+
+    @Test
+    public void shouldBeAbleToCalculateAmountOfTTANeededForOptimalBlend() {
+        double expectedTTA = 31.7370892;
+
+        double tTA = tankAnalyser.calculate();
+
+        double actualTTA = Double.parseDouble(decimalFormat.format(tTA));
+
+        assertThat(actualTTA, is(expectedTTA));
     }
 }
