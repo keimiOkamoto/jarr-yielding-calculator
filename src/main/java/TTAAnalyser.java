@@ -1,4 +1,3 @@
-import domain.TANK_TYPE;
 import domain.Tank;
 
 import java.util.List;
@@ -6,8 +5,6 @@ import java.util.List;
 public class TTAAnalyser extends TankAnalyser {
 
     private static final double TARGET_TTA = 0.14;
-
-
 
     public TTAAnalyser(List<Tank> primaryTanks, Tank acidifierTanks) {
         super(primaryTanks, acidifierTanks);
@@ -18,15 +15,17 @@ public class TTAAnalyser extends TankAnalyser {
         return getLitresOfAcidifierRequiredToMatchBaseAcidity();
     }
 
-
+    /**
+     * Gets the average TTA of primary tanks.
+     *
+     * @return the average TTA
+     */
     public double getAverage() {
         return primaryTanks.stream()
                 .mapToDouble(Tank::getTtaValue)
                 .average()
                 .getAsDouble();
     }
-
-
 
     /**
      * Acidity is calculated by minusing the average TTA value from the target TTA value.
@@ -53,11 +52,9 @@ public class TTAAnalyser extends TankAnalyser {
      * @return the total amound of acid per litre equivalent to the acidifier.
      */
     public double getLitresOfAcidifierEquivalentToTTAofBlend() {
-        double sum = primaryTanks.stream()
+        return primaryTanks.stream()
                 .mapToDouble(Tank::getVolume)
-                .sum();
-
-        return sum / getAcidifierTTALevelVsBlends();
+                .sum() / getAcidifierTTALevelVsBlends();
     }
 
     /**

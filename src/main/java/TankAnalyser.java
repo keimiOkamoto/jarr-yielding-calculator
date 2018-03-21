@@ -8,20 +8,23 @@ public abstract class TankAnalyser {
 
     protected Tank acidifierTanks;
 
-    public TankAnalyser(List<Tank> primaryTanks, Tank acidifierTanks) {
+    protected TankAnalyser(List<Tank> primaryTanks, Tank acidifierTanks) {
         this.primaryTanks = primaryTanks;
         this.acidifierTanks = acidifierTanks;
     }
 
-    public double getTotalVolume() {
+    protected double getTotalVolume() {
         return primaryTanks.stream()
                 .mapToDouble(Tank::getVolume)
                 .sum();
     }
 
+
+
     /**
-     * Given a type of property that needs to analyse
-     * @return
+     * Calculates the amount needed to match target amount.
+     *
+     * @return the amount needed to match targer amount
      */
-    abstract double calculate();
+    protected abstract double calculate();
 }
