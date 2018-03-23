@@ -18,12 +18,15 @@ public class KombuchaTank implements Tank {
     }
 
     @Override
-    public double getBrixValue() {
+    public double getValue(PROPERTY_TYPE propertyType) {
+        return PROPERTY_TYPE.BRIX.equals(propertyType) ? getBrixValue() : getTtaValue();
+    }
+
+    private double getBrixValue() {
         return brixValue;
     }
 
-    @Override
-    public double getTtaValue() {
+    private double getTtaValue() {
         return ttaValue;
     }
 
