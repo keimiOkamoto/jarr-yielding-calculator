@@ -1,9 +1,8 @@
 package domain;
 
 public interface Tank {
+
     double getVolume();
 
-    double getBrixValue();
-
-    double getTtaValue();
+    double getValueOf(PROPERTY_TYPE propertyType);
 }

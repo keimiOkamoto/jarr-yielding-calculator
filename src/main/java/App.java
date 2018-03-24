@@ -1,20 +1,32 @@
-import domain.KombuchaTank;
-import domain.Tank;
+import domain.*;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) {
-        Tank tank1 = new KombuchaTank(800, 5.2, 0.126);
-        Tank tank2 = new KombuchaTank(800, 5.1, 0.134);
+        Tank primaryTank1 = new KombuchaTank(800, 5.2, 0.126);
+        Tank primaryTank2 = new KombuchaTank(800, 5.1, 0.134);
         Tank acidifierTank = new KombuchaTank(800, 2.2, 0.852);
 
-        BrixAndAcidCalculator tta = new BrixAndAcidCalculator(new TTAAnalyser(Arrays.asList(tank1, tank2), acidifierTank));
-        double ttaValue = tta.calculate();
+        List<Tank> primaryTanks = new ArrayList<>();
+        primaryTanks.add(primaryTank1);
+        primaryTanks.add(primaryTank2);
 
-        BrixAndAcidCalculator brix = new BrixAndAcidCalculator(new BrixAnalyser(ttaValue, Arrays.asList(tank1, tank2), acidifierTank));
-        double brixValue = brix.calculate();
+        List<Tank> acidifierTanks = new ArrayList<>();
+        acidifierTanks.add(acidifierTank);
 
-        System.out.println("TTA value: " + ttaValue + " Brix value: " + brixValue);
+        Map<TANK_TYPE, List<Tank>> tanks = new HashMap<>();
+        tanks.put(TANK_TYPE.PRIMARY, primaryTanks);
+        tanks.put(TANK_TYPE.ACIDIFIER, acidifierTanks);
+        TankContainer.INSTANCE.setTanks(tanks);
+
+        TankAnalyser tankAnalyser = new TankAnalyserImpl(TankContainer.INSTANCE);
+        BrixAndAcidCalculatorService brixAndAcidCalculatorService = new BrixAndAcidCalculatorService(tankAnalyser);
+
+        double tta = brixAndAcidCalculatorService.calculate(PROPERTY_TYPE.TTA);
+        double brix = brixAndAcidCalculatorService.calculate(PROPERTY_TYPE.BRIX);
+
+        System.out.println(tta + " of TTA needed to match target");
+        System.out.println(brix + " of Brix needed to match target");
     }
 }

@@ -1,3 +1,5 @@
+package domain;
+
 import domain.TANK_TYPE;
 import domain.Tank;
 

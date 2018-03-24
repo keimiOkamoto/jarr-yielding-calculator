@@ -18,7 +18,7 @@ public class KombuchaTank implements Tank {
     }
 
     @Override
-    public double getValue(PROPERTY_TYPE propertyType) {
+    public double getValueOf(PROPERTY_TYPE propertyType) {
         return PROPERTY_TYPE.BRIX.equals(propertyType) ? getBrixValue() : getTtaValue();
     }
 
