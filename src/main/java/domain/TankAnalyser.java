@@ -1,7 +1,5 @@
 package domain;
 
-import domain.PROPERTY_TYPE;
-
 public interface TankAnalyser {
 
     /**

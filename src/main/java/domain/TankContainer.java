@@ -1,9 +1,8 @@
 package domain;
 
-import domain.TANK_TYPE;
-import domain.Tank;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public enum TankContainer {
     INSTANCE;
