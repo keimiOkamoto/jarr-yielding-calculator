@@ -1,7 +1,13 @@
 import domain.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+@SpringBootApplication
 public class App {
     public static void main(String[] args) {
         Tank primaryTank1 = new KombuchaTank(800, 5.2, 0.126);
@@ -21,7 +27,7 @@ public class App {
         TankContainer.INSTANCE.setTanks(tanks);
 
         TankAnalyser tankAnalyser = new TankAnalyserImpl(TankContainer.INSTANCE);
-        BrixAndAcidCalculatorService brixAndAcidCalculatorService = new BrixAndAcidCalculatorService(tankAnalyser);
+        JarrCalculatorService brixAndAcidCalculatorService = new BrixAndAcidCalculatorController(tankAnalyser);
 
         double tta = brixAndAcidCalculatorService.calculate(PROPERTY_TYPE.TTA);
         double brix = brixAndAcidCalculatorService.calculate(PROPERTY_TYPE.BRIX);
