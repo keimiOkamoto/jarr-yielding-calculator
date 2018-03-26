@@ -7,5 +7,5 @@ public interface TankAnalyser {
      *
      * @return the amount needed to match targer amount
      */
-    double calculate(PROPERTY_TYPE propertyType);
+    double analyse(PROPERTY_TYPE propertyType);
 }

@@ -1,6 +1,8 @@
 import domain.*;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -38,7 +40,7 @@ public class TankAnalyserImplTest {
     public void shouldBeAbleToCalculateAmountOfTTANeededForOptimalBlend() {
         double expectedTTA = 31.7370892;
 
-        double tTA = tankAnalyser.calculate(PROPERTY_TYPE.TTA);
+        double tTA = tankAnalyser.analyse(PROPERTY_TYPE.TTA);
 
         double actualTTA = Double.parseDouble(decimalFormat.format(tTA));
 
@@ -49,10 +51,21 @@ public class TankAnalyserImplTest {
     public void shouldBeAbleToCalculateAmountOfBrixNeededForOptimalBlend() {
         double expectedTTA = 2.2478873;
 
-        double brix = tankAnalyser.calculate(PROPERTY_TYPE.BRIX);
+        double brix = tankAnalyser.analyse(PROPERTY_TYPE.BRIX);
 
         double actualTTA = Double.parseDouble(decimalFormat.format(brix));
 
         assertThat(actualTTA, is(expectedTTA));
+    }
+
+
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+
+    @Test
+    public void shouldThrowUnsuportedExectionIfTypeDoesNotExist() throws Exception {
+        expected.expect(UnsupportedOperationException.class);
+        expected.expectMessage("hullo");
+        double analyse = tankAnalyser.analyse(null);
     }
 }

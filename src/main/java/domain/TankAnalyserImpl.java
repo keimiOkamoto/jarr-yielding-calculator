@@ -34,11 +34,14 @@ public class TankAnalyserImpl implements TankAnalyser {
     }
 
     @Override
-    public double calculate(PROPERTY_TYPE propertyType) {
+    public double analyse(PROPERTY_TYPE propertyType) {
+
         if (PROPERTY_TYPE.TTA.equals(propertyType)) {
             return getLitresOfAcidifierRequiredToMatchBaseAcidity();
-        } else {
+        } else if (PROPERTY_TYPE.BRIX.equals(propertyType)) {
             return getAmountOfSugarToBeAddedOrTakenAway();
+        } else {
+            throw new UnsupportedOperationException(String.format("Property type is invalid. Valid types include: %s, %s", PROPERTY_TYPE.TTA, PROPERTY_TYPE.BRIX));
         }
     }
 
