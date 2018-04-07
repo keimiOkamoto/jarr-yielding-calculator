@@ -16,12 +16,11 @@ public class TankAnalyserImplTest {
 
     private TankAnalyserImpl tankAnalyser;
 
-    private DecimalFormat decimalFormat;
+    private MathContext mathContext;
 
     @Before
     public void buildup() {
-        decimalFormat = new DecimalFormat("#.#######");
-
+        mathContext = new MathContext(4);
         Tank tank1 = new KombuchaTank(new BigDecimal(800), new BigDecimal(5.2), new BigDecimal(0.126));
         Tank tank2 = new KombuchaTank(new BigDecimal(800), new BigDecimal(5.1), new BigDecimal(0.134));
 
@@ -39,34 +38,31 @@ public class TankAnalyserImplTest {
         tankAnalyser = new TankAnalyserImpl(TankContainer.INSTANCE);
     }
 
-//    @Test
-//    public void shouldBeAbleToCalculateAmountOfTTANeededForOptimalBlend() {
-//        double expectedTTA = 31.7370892;
-//
-//        BigDecimal tTA = tankAnalyser.calculate(PROPERTY_TYPE.TTA);
-//
-////        BigDecimal actualTTA = Double.parseDouble(decimalFormat.format(tTA));
-//
-//        assertThat(tTA, is(expectedTTA));
-//    }
+    @Test
+    public void shouldBeAbleToCalculateAmountOfTTANeededForOptimalBlend() {
+        BigDecimal expectedTTA = new BigDecimal(31.7370892);
+
+        BigDecimal actualTTA = tankAnalyser.calculate(PROPERTY_TYPE.TTA);
+
+        assertThat(actualTTA.round(mathContext), is(expectedTTA.round(mathContext)));
+    }
 
     @Test
     public void shouldBeAbleToCalculateAmountOfBrixNeededForOptimalBlend() {
         BigDecimal expectedBrix = new BigDecimal(2.2478873);
 
-        BigDecimal brix = tankAnalyser.calculate(PROPERTY_TYPE.BRIX);
+        BigDecimal actualBrix = tankAnalyser.calculate(PROPERTY_TYPE.BRIX);
 
-        assertThat(brix.round(new MathContext(5)), is(expectedBrix.round(new MathContext(5))));
+        assertThat(actualBrix.round(mathContext), is(expectedBrix.round(mathContext)));
     }
 
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
 
-//    @Rule
-//    public ExpectedException expected = ExpectedException.none();
-//
-//    @Test
-//    public void shouldThrowUnsuportedExectionIfTypeDoesNotExist() throws Exception {
-//        expected.expect(UnsupportedOperationException.class);
-//        expected.expectMessage("hullo");
-//        double analyse = tankAnalyser.analyse(null);
-//    }
+    @Test
+    public void shouldThrowUnsuportedExectionIfTypeDoesNotExist() throws Exception {
+        expected.expect(UnsupportedOperationException.class);
+        expected.expectMessage("Property type is invalid. Valid types include: TTA, BRIX");
+        tankAnalyser.calculate(null);
+    }
 }

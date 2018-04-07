@@ -55,7 +55,6 @@ public class TankAnalyserImpl implements TankAnalyser {
         BigDecimal brixOrFirstTank = primaryTanks.get(0)
                                              .getValueOf(PROPERTY_TYPE.BRIX);
         return FIND_WHOLE_OF_PERCENT.apply(brixOrFirstTank, GET_TOTAL_VOLUME.apply(primaryTanks).get().subtract(getLitresOfAcidifierRequiredToMatchBaseAcidity()));
-//        return FIND_WHOLE_OF_PERCENT.apply(brixOrFirstTank, SUBTRACT.apply(GET_TOTAL_VOLUME.apply(primaryTanks), getLitresOfAcidifierRequiredToMatchBaseAcidity()));
     }
 
     private BigDecimal getQuantityOfSugarInAcidifier() {
