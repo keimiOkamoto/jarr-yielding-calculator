@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigDecimal;
+
 public interface TankAnalyser {
 
     /**
@@ -7,5 +9,5 @@ public interface TankAnalyser {
      *
      * @return the amount needed to match targer amount
      */
-    double analyse(PROPERTY_TYPE propertyType);
+    BigDecimal calculate(PROPERTY_TYPE propertyType);
 }

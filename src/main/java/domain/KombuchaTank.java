@@ -1,32 +1,34 @@
 package domain;
 
+import java.math.BigDecimal;
+
 public class KombuchaTank implements Tank {
 
-    private double volume;
-    private double brixValue;
-    private double ttaValue;
+    private BigDecimal volume;
+    private BigDecimal brixValue;
+    private BigDecimal ttaValue;
 
-    public KombuchaTank(double volume, double brixValue, double ttaValue) {
+    public KombuchaTank(BigDecimal volume, BigDecimal brixValue, BigDecimal ttaValue) {
         this.volume = volume;
         this.brixValue = brixValue;
         this.ttaValue = ttaValue;
     }
 
     @Override
-    public double getVolume() {
+    public BigDecimal getVolume() {
         return volume;
     }
 
     @Override
-    public double getValueOf(PROPERTY_TYPE propertyType) {
+    public BigDecimal getValueOf(PROPERTY_TYPE propertyType) {
         return PROPERTY_TYPE.BRIX.equals(propertyType) ? getBrixValue() : getTtaValue();
     }
 
-    private double getBrixValue() {
+    private BigDecimal getBrixValue() {
         return brixValue;
     }
 
-    private double getTtaValue() {
+    private BigDecimal getTtaValue() {
         return ttaValue;
     }
 

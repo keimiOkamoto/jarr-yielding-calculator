@@ -12,8 +12,18 @@ public class BrixAndAcidCalculatorService implements JarrCalculatorService {
     }
 
     @Override
-    public double calculate(PROPERTY_TYPE propertyType){
-        return tankAnalyser.analyse(propertyType);
+    public double calculate() {
+
+//        if (brix == 5.0) {
+//            return brix;
+//        } else
+//            double tta = tankAnalyser.analyse(PROPERTY_TYPE.TTA);
+//            double brix = tankAnalyser.analyse(PROPERTY_TYPE.BRIX);
+//
+//            calculate();
+//
+//        return tankAnalyser.analyse(PROPERTY_TYPE.TTA);\
+        return 0;
     }
 
     @Override
