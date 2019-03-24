@@ -29,34 +29,38 @@ public class Calculator implements JarrCalculatorService {
     }
 
     private boolean isAcidic() {
-        return getAverageTTAof(tanks) > TARGET_TTA;
+        return getAverageTtaOfAllTanks() > TARGET_TTA;
     }
 
     public double getAmountOfWaterNeededToAdjustTTA() {
-        double percentageOfWaterNeeded = (getAverageTTAof(tanks) - TARGET_TTA) / getAverageTTAof(tanks);
-        double totalVolume = tanks.stream().mapToDouble(Tank::getVolume).sum();
+        double percentageOfWaterNeeded = (getAverageTtaOfAllTanks() - TARGET_TTA) / getAverageTtaOfAllTanks();
+        double totalVolume = getTotalVolumeOfTanks();
         double percentageCalculationOfTank = percentageOfWaterNeeded * totalVolume;
         double litersOfWaterNeeded = (totalVolume - percentageCalculationOfTank) / tanks.size();
         return litersOfWaterNeeded;
     }
 
-    private double getPercentageNeeded() {
-        return (getAverageTTAof(tanks) - TARGET_TTA) / getAverageTTAof(tanks);
-    }
-
     private double getAmountOfSugarNeededKg() {
-        double percentOfBrix = getBrixAAverage(tanks) * getPercentageNeeded();
-        double kgsSugar = (TARGET_BRIX - (getBrixAAverage(tanks) - percentOfBrix)) * 10;
-        double totalVolume = tanks.stream().mapToDouble(Tank::getVolume).sum();
+        double percentOfBrix = getAverageBrixOfAllTanks() * getPercentageNeeded();
+        double kgsSugar = (TARGET_BRIX - (getAverageBrixOfAllTanks() - percentOfBrix)) * 10;
+        double totalVolume = getTotalVolumeOfTanks();
 
         return kgsSugar * totalVolume / 1000;
     }
 
-    private static double getAverageTTAof(List<Tank> tanks) {
+    private double getPercentageNeeded() {
+        return (getAverageTtaOfAllTanks() - TARGET_TTA) / getAverageTtaOfAllTanks();
+    }
+
+    private double getTotalVolumeOfTanks() {
+        return tanks.stream().mapToDouble(Tank::getVolume).sum();
+    }
+
+    private double getAverageTtaOfAllTanks() {
         return tanks.stream().collect(Collectors.averagingDouble(tank -> tank.getValueOf(PROPERTY_TYPE.TTA)));
     }
 
-    private static double getBrixAAverage(List<Tank> tanks) {
+    private double getAverageBrixOfAllTanks() {
         return tanks.stream().collect(Collectors.averagingDouble(tank -> tank.getValueOf(PROPERTY_TYPE.BRIX)));
     }
 }
