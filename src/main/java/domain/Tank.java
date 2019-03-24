@@ -1,10 +1,9 @@
 package domain;
 
-import java.math.BigDecimal;
-
 public interface Tank {
 
-    BigDecimal getVolume();
+    double getVolume();
 
-    BigDecimal getValueOf(PROPERTY_TYPE propertyType);
+    double getValueOf(PROPERTY_TYPE propertyType);
+
 }
