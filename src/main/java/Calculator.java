@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Calculator implements JarrCalculatorService {
     private static final double TARGET_TTA = 0.140;
-    private static final double TARGET_BRIX = 5.0;
+    private static final double TARGET_BRIX = 5.00;
 
     private List<Tank> tanks;
 
@@ -16,16 +16,45 @@ public class Calculator implements JarrCalculatorService {
     }
 
     public Report calculate() {
+        Report report = new Report();
         if (isAcidic()) {
-            Report report = new Report();
             report.setWaterAdjustment(getAmountOfWaterNeededToAdjustTTA());
             report.setBrixAdjustment(getAmountOfSugarNeededKg());
             return report;
 
         } else {
+            adjustSugar(report);
+
             //needs acidifier
             return null;
         }
+    }
+
+    private double adjustSugar(Report report) {
+        if (getAverageBrixOfAllTanks() > TARGET_BRIX) {
+            //water must be added
+            //how much is the sugar too high by?]
+            double exceededPercentage = (TARGET_BRIX / (getAverageBrixOfAllTanks() - TARGET_BRIX)) / 1000;
+
+            double newTta = adjustTta(exceededPercentage);
+            if (newTta < TARGET_TTA) {
+                //Acidifier tank is added
+
+            }
+
+
+        } else {
+            //sugar must be added
+        }
+        return 0;
+    }
+
+    private double adjustTta(double exceededPercentage) {
+        if (getAverageTtaOfAllTanks() != TARGET_TTA) {
+            double amountToDilute = exceededPercentage * getAverageTtaOfAllTanks();
+            return getAverageTtaOfAllTanks() - amountToDilute;
+        }
+        return 0;
     }
 
     private boolean isAcidic() {
