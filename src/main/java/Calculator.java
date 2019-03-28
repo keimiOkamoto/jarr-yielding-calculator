@@ -24,9 +24,7 @@ public class Calculator implements JarrCalculatorService {
 
         } else {
             adjustSugar(report);
-
-            //needs acidifier
-            return null;
+            return report;
         }
     }
 
@@ -34,10 +32,16 @@ public class Calculator implements JarrCalculatorService {
         if (getAverageBrixOfAllTanks() > TARGET_BRIX) {
             //water must be added
             //how much is the sugar too high by?]
-            double exceededPercentage = (TARGET_BRIX / (getAverageBrixOfAllTanks() - TARGET_BRIX)) / 1000;
+            double amountExceededInPercentage = (getAverageBrixOfAllTanks() - TARGET_BRIX) / TARGET_BRIX;
+            addWater(amountExceededInPercentage, report);
+            double newTta = adjustTta(amountExceededInPercentage);
 
-            double newTta = adjustTta(exceededPercentage);
             if (newTta < TARGET_TTA) {
+//                double multiplier = 1.104 - newTta;
+//                double literes = 1600/multiplier;
+//                double increaseNeededPercentage = TARGET_TTA-newTta;
+//                double amount = TARGET_TTA/increaseNeededPercentage;
+//                (1/amount)*100;
                 //Acidifier tank is added
 
             }
@@ -47,6 +51,17 @@ public class Calculator implements JarrCalculatorService {
             //sugar must be added
         }
         return 0;
+    }
+
+    private void addWater(double amountExceededInPercentage, Report report) {
+//        double five = getAverageBrixOfAllTanks() - (amountExceededInPercentage * getAverageBrixOfAllTanks());
+
+        report.setWaterAdjustment((amountExceededInPercentage * 100) * 1600 / 100); //should reach five
+        getNewTtaValue(amountExceededInPercentage);
+    }
+
+    private double getNewTtaValue(double amountExceededInPercentage) {
+        return getAverageTtaOfAllTanks() - (amountExceededInPercentage * getAverageTtaOfAllTanks());
     }
 
     private double adjustTta(double exceededPercentage) {
