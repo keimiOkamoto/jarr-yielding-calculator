@@ -1,3 +1,4 @@
+import domain.KombuchaTank;
 import domain.PROPERTY_TYPE;
 import domain.Report;
 import domain.Tank;
@@ -34,18 +35,6 @@ public class Calculator implements JarrCalculatorService {
             //how much is the sugar too high by?]
             double amountExceededInPercentage = (getAverageBrixOfAllTanks() - TARGET_BRIX) / TARGET_BRIX;
             addWater(amountExceededInPercentage, report);
-            double newTta = adjustTta(amountExceededInPercentage);
-
-            if (newTta < TARGET_TTA) {
-//                double multiplier = 1.104 - newTta;
-//                double literes = 1600/multiplier;
-//                double increaseNeededPercentage = TARGET_TTA-newTta;
-//                double amount = TARGET_TTA/increaseNeededPercentage;
-//                (1/amount)*100;
-                //Acidifier tank is added
-
-            }
-
 
         } else {
             //sugar must be added
@@ -54,10 +43,30 @@ public class Calculator implements JarrCalculatorService {
     }
 
     private void addWater(double amountExceededInPercentage, Report report) {
-//        double five = getAverageBrixOfAllTanks() - (amountExceededInPercentage * getAverageBrixOfAllTanks());
+//        double shouldBeFive = getAverageBrixOfAllTanks() - (amountExceededInPercentage * getAverageBrixOfAllTanks());
 
         report.setWaterAdjustment((amountExceededInPercentage * 100) * 1600 / 100); //should reach five
-        getNewTtaValue(amountExceededInPercentage);
+        double newTta = getNewTtaValue(amountExceededInPercentage);
+        //add acid
+        Tank acidifier = new KombuchaTank(800,3.8, 1.104);
+
+        double multiplier = acidifier.getValueOf(PROPERTY_TYPE.TTA) / newTta;
+        double increaseNeeded = TARGET_TTA - newTta;
+
+        double equivalentLitersOfTta = 1600 / multiplier;
+        double percentage = (1/(TARGET_TTA/increaseNeeded))*100;
+
+        double litresNeeedFromAcidifier = (equivalentLitersOfTta/100) * percentage;
+
+        double tankVolume = 1600 + litresNeeedFromAcidifier;
+
+        double acidPercentageForVol = litresNeeedFromAcidifier / (tankVolume/100);
+
+
+
+
+
+
     }
 
     private double getNewTtaValue(double amountExceededInPercentage) {
