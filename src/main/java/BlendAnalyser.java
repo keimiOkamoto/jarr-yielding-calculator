@@ -1,7 +1,8 @@
-import domain.KombuchaTank;
 import domain.Tank;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class BlendAnalyser implements KombuchaAnalyser {
@@ -9,12 +10,14 @@ public class BlendAnalyser implements KombuchaAnalyser {
     private static final double TARGET_TTA = 0.140;
     private static final double TARGET_BRIX = 5.00;
     private List<Tank> baseTanks;
+    private List<Tank> acidifier;
     private Tank blend;
 
 
-    public BlendAnalyser(List<Tank> baseTanks) {
-        this.baseTanks = baseTanks;
-        this.blend = new KombuchaTank(0.0, 0.0, 0.0);
+    public BlendAnalyser(Map<TANK_TYPE, List<Tank>> tanks) {
+        this.baseTanks = tanks.get(TANK_TYPE.BASE);
+        this.acidifier = tanks.get(TANK_TYPE.ACIDIFIER);
+        this.blend = tanks.get(TANK_TYPE.BLEND).get(0);
         setBlend(this.blend);
     }
 
@@ -76,5 +79,10 @@ public class BlendAnalyser implements KombuchaAnalyser {
     @Override
     public void setBrixValue(double value) {
         blend.setBrixValue(value);
+    }
+
+    @Override
+    public Optional<Tank> getAcidTank() {
+        return acidifier.stream().findAny();
     }
 }

@@ -20,7 +20,7 @@ public class BlendGenerator {
             if (brewAnalyser.isTooAcidic()) {
                 double litres = (brewAnalyser.getTotalVolume() - getLitresOfWaterNeededToReachTargetTta()) / brewAnalyser.getTankCount();
             } else {
-                //Add acid
+                getLitresOfAcidNeededToReachTargetTta();
             }
 
             if (brewAnalyser.tooMuchBrix()) {
@@ -31,6 +31,11 @@ public class BlendGenerator {
             createBlend();
         }
         return report;
+    }
+
+    private double getLitresOfAcidNeededToReachTargetTta() {
+        brewAnalyser.getAcidTank();
+        return 0;
     }
 
     public double getLitresOfWaterNeededToReachTargetTta() {

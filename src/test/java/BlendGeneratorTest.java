@@ -34,7 +34,12 @@ public class BlendGeneratorTest {
     }
 
     private BlendGenerator getBlendGenerator(List<Tank> tanks) {
-        BlendAnalyser blendAnalyser = new BlendAnalyser(tanks);
+        Map<TANK_TYPE, List<Tank>> mapOfTanks = Map.of(
+                        TANK_TYPE.BASE, tanks,
+                        TANK_TYPE.BLEND, Collections.singletonList(new KombuchaTank(0.0, 0.0, 0.0)),
+                        TANK_TYPE.ACIDIFIER, Collections.singletonList(new KombuchaTank(800, 3.5, 0.18)));
+
+        BlendAnalyser blendAnalyser = new BlendAnalyser(mapOfTanks);
         Report report = new Report();
         return new BlendGenerator(blendAnalyser, report);
     }

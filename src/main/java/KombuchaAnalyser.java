@@ -1,3 +1,7 @@
+import domain.Tank;
+
+import java.util.Optional;
+
 public interface KombuchaAnalyser {
     double getTTaValue();
 
@@ -21,4 +25,5 @@ public interface KombuchaAnalyser {
 
     void setBrixValue(double value);
 
+    Optional<Tank> getAcidTank();
 }
