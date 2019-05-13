@@ -4,6 +4,12 @@ public interface Tank {
 
     double getVolume();
 
-    double getValueOf(PROPERTY_TYPE propertyType);
+    double getBrixValue();
+
+    double getTtaValue();
+
+    void setBrixValue(double value);
+
+    void setTtaValue(double value);
 
 }

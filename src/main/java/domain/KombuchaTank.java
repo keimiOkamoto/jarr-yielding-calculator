@@ -12,22 +12,24 @@ public class KombuchaTank implements Tank {
         this.ttaValue = ttaValue;
     }
 
-    @Override
     public double getVolume() {
         return volume;
     }
 
-    @Override
-    public double getValueOf(PROPERTY_TYPE propertyType) {
-        return PROPERTY_TYPE.BRIX.equals(propertyType) ? getBrixValue() : getTtaValue();
-    }
-
-    private double getBrixValue() {
+    public double getBrixValue() {
         return brixValue;
     }
 
-    private double getTtaValue() {
+    public double getTtaValue() {
         return ttaValue;
+    }
+
+    public void setBrixValue(double value) {
+        this.brixValue = value;
+    }
+
+    public void setTtaValue(double value) {
+        this.ttaValue = value;
     }
 
 }

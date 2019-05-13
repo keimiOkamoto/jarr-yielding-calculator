@@ -5,27 +5,31 @@ public class Report {
     private double brixAdjustment;
     private double waterAdjustment;
 
-    public double getTtaAdjustment() {
+    public Report() {
+    }
+
+    public double getTtaAdjustmentNeededInLitres() {
         return ttaAdjustment;
     }
 
-    public void setTtaAdjustment(double ttaAdjustment) {
+    public void setTtaAdjustmentNeededInLitres(double ttaAdjustment) {
         this.ttaAdjustment = ttaAdjustment;
     }
 
-    public double getBrixAdjustment() {
+    public double getBrixAdjustmentNeededInKg() {
         return brixAdjustment;
     }
 
-    public void setBrixAdjustment(double brixAdjustment) {
+    public void setBrixAdjustmentNeededInKg(double brixAdjustment) {
         this.brixAdjustment = brixAdjustment;
     }
 
-    public double getWaterAdjustment() {
+    public double getWaterAdjustmentNeededInLitres() {
         return waterAdjustment;
     }
 
-    public void setWaterAdjustment(double waterAdjustment) {
+    public void setWaterAdjustmentNeededInLitres(double waterAdjustment) {
         this.waterAdjustment = waterAdjustment;
     }
+
 }
