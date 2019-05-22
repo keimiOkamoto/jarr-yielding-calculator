@@ -12,4 +12,5 @@ public interface Tank {
 
     void setTtaValue(double value);
 
+    void setVolume(double value);
 }

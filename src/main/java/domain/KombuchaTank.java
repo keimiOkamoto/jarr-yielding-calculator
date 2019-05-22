@@ -35,6 +35,11 @@ public class KombuchaTank implements Tank {
     }
 
     @Override
+    public void setVolume(double value) {
+        this.volume = value;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
