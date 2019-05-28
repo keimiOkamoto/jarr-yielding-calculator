@@ -1,3 +1,7 @@
+package domain;
+
+import domain.BlendMetricsCalculator;
+import domain.Calculator;
 import domain.KombuchaTank;
 import domain.Tank;
 import org.junit.Before;
@@ -40,13 +44,29 @@ public class BlendMetricsCalculatorTest {
 
     @Test
     public void shouldCalculateKilogramsOfSugarNeededToReachTargetBrix() {
-        double actualKilograms = calculator.getKilogramsOfSugarNeededToReachTarget(new KombuchaTank(800,3.9, 0.14));
+        double actualKilograms = calculator.getKilogramsOfSugarNeededToReachTarget(new KombuchaTank(800, 3.9, 0.14));
         assertThat(actualKilograms, is(17.6));
+    }
+
+    @Test
+    public void shouldCalculateEquivalentAmountOfAcidToBaseTanks() {
+        double actualAcid = calculator.getEquivalentAmountOfAcidInLitres(getTank(800, 3.8, 1.104), getTank(800, 5.0, 0.109), 1600);
+        assertThat(actualAcid, is(34.22));
+    }
+
+    @Test
+    public void shouldCalculatePercentageOfWaterNeededToReachTargetBrix() {
+        double actualPercentage = calculator.getPercentageWaterNeededToReachTargetBrix(getBlend(THREE_TANKS), 5.026);
+        assertThat(actualPercentage, is(0.027));
     }
 
     private Tank getBlend(List<Tank> tanks) {
         Double ttaValue = tanks.stream().collect(Collectors.averagingDouble(Tank::getTtaValue));
         Double brixValue = tanks.stream().collect(Collectors.averagingDouble(Tank::getBrixValue));
         return new KombuchaTank(800, brixValue, ttaValue);
+    }
+
+    private Tank getTank(double volume, double brix, double tta) {
+        return new KombuchaTank(volume, brix, tta);
     }
 }

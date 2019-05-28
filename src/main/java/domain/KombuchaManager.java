@@ -1,6 +1,6 @@
-import domain.Tank;
+package domain;
 
-public interface Adjuster {
+public interface KombuchaManager {
 
     Tank getDefaultBlend();
 
@@ -9,4 +9,6 @@ public interface Adjuster {
     Tank getBlend();
 
     void addSugarBy(double kgs);
+
+    void addAcidBy(double litres);
 }

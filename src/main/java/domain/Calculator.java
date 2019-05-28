@@ -1,4 +1,4 @@
-import domain.Tank;
+package domain;
 
 public interface Calculator {
 
@@ -8,5 +8,8 @@ public interface Calculator {
 
     double getPercentageWaterNeededToReachTargetBrix(Tank blend);
 
-    double getEquivalentAmountOfAcidToBaseTanks();
+    double getEquivalentAmountOfAcidInLitres(Tank Acid, Tank blend, int totalVolume);
+
+    double getPercentageWaterNeededToReachTargetBrix(Tank blend, double targetBrix);
+
 }

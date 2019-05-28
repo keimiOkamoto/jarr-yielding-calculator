@@ -1,4 +1,4 @@
-import domain.Tank;
+package domain;
 
 public class Reporter {
 
@@ -16,13 +16,11 @@ public class Reporter {
         return calculator.getKilogramsOfSugarNeededToReachTarget(blend);
     }
 
-
     public double getWaterToReachTargetBrix(Tank blend) {
         return calculator.getPercentageWaterNeededToReachTargetBrix(blend) * 1600;
     }
 
-    public double getAcidToReachTargetTta(Tank blend) {
-        double litres = calculator.getEquivalentAmountOfAcidToBaseTanks();
-        return 0;
+    public double getLitresOfAcidToReachTargetTta(Tank acid, Tank blend, int totalVolume) {
+        return calculator.getEquivalentAmountOfAcidInLitres(acid, blend, totalVolume);
     }
 }

@@ -1,5 +1,6 @@
-import domain.KombuchaTank;
-import domain.Tank;
+package domain;
+
+import domain.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class ReporterTest {
                 new KombuchaTank(800, 5.3, 0.104));
     }
 
-    private Map<Integer, BrewPropertyAdjuster> generateBlendWithTankNumberOf;
+    private Map<Integer, BlendPropertyManager> generateBlendWithTankNumberOf;
 
     private static List<Tank> TWO_TANKS;
     private static List<Tank> THREE_TANKS;
@@ -37,7 +38,7 @@ public class ReporterTest {
 
     @Test
     public void shouldBeAbleToGetAmountOfSugarNeededToReachTargetBrix() {
-        double litres = reporter.getSugarToReachTargetBrix(getBlendWith(TWO_TANKS));
+        double litres = reporter.getSugarToReachTargetBrix(getTank(800, 3.9, 0.140));
         assertThat(litres, is(17.6));
     }
 
@@ -48,15 +49,19 @@ public class ReporterTest {
     }
 
     @Test
-    public void shouldBeAbleToGetAmoundOfAcidNeededToReachTargetTta() {
-        double litres = reporter.getAcidToReachTargetTta(getBlendWith(THREE_TANKS));
-        assertThat(litres, is(0.0));
+    public void shouldBeAbleToGetLitresOfAcidNeededToReachTargetTta() {
+        double litres = reporter.getLitresOfAcidToReachTargetTta(getTank(800, 3.8, 1.104), getTank(800, 5.0, 0.109), 1600);
+        assertThat(litres, is(34.22));
     }
 
     private Tank getBlendWith(List<Tank> tanks) {
         Double ttaValue = tanks.stream().collect(Collectors.averagingDouble(Tank::getTtaValue));
         Double brixValue = tanks.stream().collect(Collectors.averagingDouble(Tank::getBrixValue));
         return new KombuchaTank(800, brixValue, ttaValue);
+    }
+
+    private Tank getTank(double volume, double brix, double tta) {
+        return new KombuchaTank(volume, brix, tta);
     }
 
 }
