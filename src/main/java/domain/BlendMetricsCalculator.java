@@ -7,15 +7,15 @@ public class BlendMetricsCalculator implements Calculator {
     private double targetTta = 0.14;
     private double targetBrix = 5.0;
 
-    @Override
-    public double getPercentageWaterNeededToReachTargetTta(Tank blend) {
-        return convertToThreeDecimalPlaces((blend.getTtaValue() - targetTta) / blend.getTtaValue());
-    }
+//    @Override
+//    public double getPercentageWaterNeededToReachTargetTta(Tank blend) {
+//        return convertToThreeDecimalPlaces((blend.getTtaValue() - targetTta) / blend.getTtaValue());
+//    }
 
-    @Override
-    public double getKilogramsOfSugarNeededToReachTarget(Tank blend) {
-        return convertToThreeDecimalPlaces((getBrixDifferenceFromTarget(blend.getBrixValue()) * 1600) / 100);
-    }
+//    @Override
+//    public double getKilogramsOfSugarNeededToReachTarget(Tank blend) {
+//        return convertToThreeDecimalPlaces((getBrixDifferenceFromTarget(blend.getBrixValue()) * 1600) / 100);
+//    }
 
     @Override
     public double getPercentageWaterNeededToReachTargetBrix(Tank blend) {
@@ -48,9 +48,9 @@ public class BlendMetricsCalculator implements Calculator {
         return (1 / value) * 100;
     }
 
-    private double getBrixDifferenceFromTarget(double brixValue) {
-        return (targetBrix - brixValue);
-    }
+//    private double getBrixDifferenceFromTarget(double brixValue) {
+//        return (targetBrix - brixValue);
+//    }
 
     private double convertToTwoDecimalPlaces(double number) {
         return new BigDecimal(number).setScale(2, RoundingMode.HALF_UP).doubleValue();

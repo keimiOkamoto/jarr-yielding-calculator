@@ -36,17 +36,17 @@ public class BlendMetricsCalculatorTest {
         calculator = new BlendMetricsCalculator();
     }
 
-    @Test
-    public void shouldCalculatePercentageOfWaterNeededToReachTargetTta() {
-        double actualPercentage = calculator.getPercentageWaterNeededToReachTargetTta(getBlend(TWO_TANKS));
-        assertThat(actualPercentage, is(0.195));
-    }
+//    @Test
+//    public void shouldCalculatePercentageOfWaterNeededToReachTargetTta() {
+//        double actualPercentage = calculator.getPercentageWaterNeededToReachTargetTta(getBlend(TWO_TANKS));
+//        assertThat(actualPercentage, is(0.195));
+//    }
 
-    @Test
-    public void shouldCalculateKilogramsOfSugarNeededToReachTargetBrix() {
-        double actualKilograms = calculator.getKilogramsOfSugarNeededToReachTarget(new KombuchaTank(800, 3.9, 0.14));
-        assertThat(actualKilograms, is(17.6));
-    }
+//    @Test
+//    public void shouldCalculateKilogramsOfSugarNeededToReachTargetBrix() {
+//        double actualKilograms = calculator.getKilogramsOfSugarNeededToReachTarget(new KombuchaTank(800, 3.9, 0.14));
+//        assertThat(actualKilograms, is(17.6));
+//    }
 
     @Test
     public void shouldCalculateEquivalentAmountOfAcidToBaseTanks() {

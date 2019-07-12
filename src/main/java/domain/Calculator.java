@@ -2,9 +2,9 @@ package domain;
 
 public interface Calculator {
 
-    double getPercentageWaterNeededToReachTargetTta(Tank blend);
+//    double getPercentageWaterNeededToReachTargetTta(Tank blend);
 
-    double getKilogramsOfSugarNeededToReachTarget(Tank blend);
+//    double getKilogramsOfSugarNeededToReachTarget(Tank blend);
 
     double getPercentageWaterNeededToReachTargetBrix(Tank blend);
 
