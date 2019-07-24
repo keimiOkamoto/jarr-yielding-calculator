@@ -5,12 +5,13 @@ import domain.Tank;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import static domain.newsevice.domain.TargetPropertyValue.TTA_TARGET;
+
 public class WaterCalculator implements KombuchaPropertyCalculator {
-    private double TARGET_TTA = 0.14;
 
     @Override
     public double calculate(Tank blend) {
-        return convertToThreeDecimalPlaces((blend.getTtaValue() - TARGET_TTA) / blend.getTtaValue()) * 100;
+        return convertToThreeDecimalPlaces((blend.getTtaValue() - TTA_TARGET.get()) / blend.getTtaValue()) * 100;
     }
 
     private double convertToThreeDecimalPlaces(double number) {

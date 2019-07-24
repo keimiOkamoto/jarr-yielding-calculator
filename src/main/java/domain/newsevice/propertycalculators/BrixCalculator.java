@@ -5,8 +5,9 @@ import domain.Tank;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import static domain.newsevice.domain.TargetPropertyValue.BRIX_TARGET;
+
 public class BrixCalculator implements KombuchaPropertyCalculator {
-    private static final double TARGET_BRIX = 5.0;
 
     @Override
     public double calculate(Tank blend) {
@@ -14,7 +15,7 @@ public class BrixCalculator implements KombuchaPropertyCalculator {
     }
 
     private double getBrixDifferenceFromTarget(double brixValue) {
-        return (TARGET_BRIX - brixValue);
+        return (BRIX_TARGET.get() - brixValue);
     }
 
     private double convertToThreeDecimalPlaces(double number) {

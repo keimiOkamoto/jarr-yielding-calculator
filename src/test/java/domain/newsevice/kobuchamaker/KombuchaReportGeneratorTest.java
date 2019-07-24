@@ -2,10 +2,9 @@ package domain.newsevice.kobuchamaker;
 
 import domain.KombuchaTank;
 import domain.Tank;
-import domain.newsevice.PropertyManager.BrixAdder;
-import domain.newsevice.propertycalculators.BrixCalculator;
+import domain.newsevice.PropertyManager.WaterAdder;
+import domain.newsevice.propertycalculators.WaterCalculator;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +22,11 @@ public class KombuchaReportGeneratorTest {
     public void shouldWorkOutHowMuchBrixIsNeededToReachTargetBrix() {
         List<Tank> tanks = Arrays.asList(new KombuchaTank(800, 4.9, 0.188), new KombuchaTank(800, 4.8, 0.160));
 
-        KombuchaPropertyValueManager waterPropertyValueManager = new KombuchaPropertyValueManager(new BrixCalculator(), new BrixAdder());
+        KombuchaPropertyValueModifier waterPropertyValueManager = new KombuchaPropertyValueModifier(new WaterCalculator(), new WaterAdder());
 
         kombuchaReportGenerator = new KombuchaReportGenerator(tanks, waterPropertyValueManager);
-        kombuchaReportGenerator.generateReport();
+        Report report = kombuchaReportGenerator.generateReport();
+
     }
 
 }

@@ -5,7 +5,6 @@ import domain.newsevice.PropertyManager.BrixAdder;
 import domain.newsevice.PropertyManager.KombuchaPropertyAdder;
 import domain.newsevice.propertycalculators.BrixCalculator;
 import domain.newsevice.propertycalculators.KombuchaPropertyCalculator;
-import org.junit.Test;
 import org.mockito.Mock;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -19,7 +18,7 @@ public class BrixValueModifierTest {
 
     @Mock
     private Tank tank = mock(Tank.class);
-    private KombuchaPropertyValueManager brixValueModifier = new KombuchaPropertyValueManager(kombuchaPropertyCalculator, kombuchaPropertyAdder);
+    private KombuchaPropertyValueModifier brixValueModifier = new KombuchaPropertyValueModifier(kombuchaPropertyCalculator, kombuchaPropertyAdder);
 
 //    @Test
 //    public void shouldBeAbleToGetAmountOfBrixNeededToReachTarget() {

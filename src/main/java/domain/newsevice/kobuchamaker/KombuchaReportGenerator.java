@@ -1,30 +1,31 @@
 package domain.newsevice.kobuchamaker;
 
-import domain.KombuchaTank;
 import domain.Tank;
 import domain.newsevice.factory.KombuchaBlendFactory;
 
 import java.util.List;
 
+import static domain.newsevice.domain.TargetPropertyValue.*;
+
 public class KombuchaReportGenerator {
 
-    private static final double TARGET_TTA = 0.14;
-    private static final double BRIX = 5.0;
-    private KombuchaPropertyValueManager waterPropertyValueManager;
+    private KombuchaPropertyValueModifier waterPropertyValueManager;
     private Tank blend;
 
-    public KombuchaReportGenerator(List<Tank> tanks, KombuchaPropertyValueManager waterPropertyValueManager) {
+    public KombuchaReportGenerator(List<Tank> tanks, KombuchaPropertyValueModifier waterPropertyValueManager) {
         this.blend = KombuchaBlendFactory.INSTANCE.getInitialTank(tanks);
-        System.out.println(blend.getTtaValue() + " " + blend.getBrixValue());
         this.waterPropertyValueManager = waterPropertyValueManager;
     }
 
 
     public Report generateReport() {
-        if (blend.getTtaValue() > TARGET_TTA) {
-            Tank tank = waterPropertyValueManager.modifyValue(blend);
-            System.out.println(tank.getTtaValue());
+        if (blend.getTtaValue() > TTA_TARGET.get()) {
+            blend = waterPropertyValueManager.modifyValue(blend);
+
+        } else {
+
         }
+
         return null;
     }
 }
